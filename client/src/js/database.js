@@ -23,8 +23,8 @@ const contactDb = await openDB('jate', 1);
   // Open up the desired object store.
   const store = tx.objectStore('jate');
 
-  // Use the .add() method on the store and pass in the content.
-  const request = store.add({ content:content });
+  // Use the .put() method on the store and pass in the content.
+  const request = store.put({ content:content, id:1 });
 
   // Get confirmation of the request.
   const result = await request;
@@ -45,11 +45,11 @@ console.log('GET from the database');
   const store = tx.objectStore('jate');
 
   // Use the .getAll() method to get all data in the database.
-  const request = store.getAll();
+  const request = store.get(1);
 
   // Get confirmation of the request.
   const result = await request;
   console.log('result.value', result);
-  return result;
+  return result?.value;
 }
 initdb();
